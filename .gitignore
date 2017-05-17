@@ -1,2 +1,5 @@
 # Ignore scratch directory
 scratch/*
+
+# Ignore built artifacts
+build/*
