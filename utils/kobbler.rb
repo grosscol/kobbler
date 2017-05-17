@@ -40,7 +40,7 @@ class Kobbler
 
     # write knowledge object
     outfile_name = "#{File.basename(input_dir)}.json"
-    File.write( File.join(Dir.pwd, outfile_name), kobject.to_json ) 
+    File.write( File.join(output_dir, outfile_name), kobject.to_json ) 
   end
 
   def self.build_template(metadata, template)

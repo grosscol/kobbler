@@ -11,9 +11,12 @@ task :default => :kobble
 
 # Find the payloads in the src directory and make knowledge objects
 task :kobble do
-  puts "Kobbling all payloads."
+  puts "Kobbling all payloads into ./build"
+
+  output_dir = File.expand_path('../build', __FILE__)
+  src_dir    = File.expand_path('../src', __FILE__)
+  
   # Find all payload files in the src directory
-  src_dir = File.expand_path('../src', __FILE__)
   payloads = []
   Find.find(src_dir) do |path|
     payloads << path if File.basename(path, '.*') == 'payload'
@@ -22,7 +25,7 @@ task :kobble do
   # Run Kobbler on the directory containing the payload
   payloads.each do |path|
     puts "Running kobbler for #{path}"
-    Kobbler.kobble( File.expand_path('..', path) )
+    Kobbler.kobble(File.expand_path('..', path), output_dir)
   end
 end
 
