@@ -1,0 +1,15 @@
+# function name: name of function
+# parameters:
+#   - name: param_name
+#     type: TYPE
+# return_type: TYPE
+# 
+# Currently function defaults to 'perform' and is not overridden by these settings
+---
+function_name: perform
+parameters:
+  - name: name
+    type: STRING
+  - name: number_of_greetings
+    type: INT
+return_type: STRING

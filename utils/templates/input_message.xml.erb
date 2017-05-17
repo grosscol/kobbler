@@ -1,0 +1,22 @@
+<rdf:RDF xmlns:ot="http://uofm.org/objectteller/#"
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://uofm.org/objectteller/inputMessage">
+    <%="<ot:noofparams>#{parameters.count}</ot:noofparams>"%>
+    <ot:params>
+		<% if parameters.count > 0 %>
+    <rdf:Seq>
+      <% parameters.each do |param| %>
+      <%=  "<rdf:li>#{param['name']}</rdf:li>"%>
+		  <% end %>
+    </rdf:Seq>
+		<% end %>
+    </ot:params>
+  </rdf:Description>
+  <% if parameters.count > 0 %>
+	  <% parameters.each do |param| %>
+  <%= "<rdf:Description rdf:about=\"http://uofm.org/objectteller/#{param['name']}/\"" %>
+    <%= "<ot:datatype>#{param['type']}</ot:datatype>" %>
+  </rdf:Description>
+		<% end %>
+	<% end %>
+</rdf:RDF>
