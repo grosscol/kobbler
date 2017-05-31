@@ -14,7 +14,7 @@
   </rdf:Description>
   <% if parameters.count > 0 %>
 	  <% parameters.each do |param| %>
-  <%= "<rdf:Description rdf:about=\"http://uofm.org/objectteller/#{param['name']}/\"" %>
+      <%= "<rdf:Description rdf:about=\"http://uofm.org/objectteller/#{param['name']}/\">" %>
     <%= "<ot:datatype>#{param['type']}</ot:datatype>" %>
   </rdf:Description>
 		<% end %>

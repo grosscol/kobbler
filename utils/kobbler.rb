@@ -65,9 +65,9 @@ class Kobbler
     return {} unless payload_path
 
     # return a hash of the payload
-    { contents: File.read(payload_path),
-      function_name: "perform",
-      engine_type: resolve_engine(payload_path) }
+    { content: File.read(payload_path),
+      functionName: "perform",
+      engineType: resolve_engine(payload_path) }
   end
 
   def self.find_payload_file(input_dir)
