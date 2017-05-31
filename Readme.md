@@ -1,29 +1,47 @@
-# Colin's Knowledge Objects
+# Knowledge Object Build Utility
 
 ## Description
 Knowledge Grid Knowledge Objects for development with the Landis-Lewis Lab.
 
-## Setup
-```
-bundle install
-```
+## Prerequisites
+* Knowledge Grid Activator is running locally on port 8080.
+* Ruby 2.4.1 
+* Gem dependencies installed
+    ```
+    bundle install
+    ```
 
-## Use
+## Example Use
+1. Make sure an activator is running locally
+2. Build all the knowledge objects
+    ```
+    rake kobble
+    ```
+3. Load the hello-js knowledge object into the activator
+    ```
+    rake activate['hello-js']
+    ```
+4. Test the hello-js knowledge object.
+    ```
+    rake test['hello-js']
+    ```
+
+## Authoring New Knowledg Objects
 1. Make directory under src/
 1. Write metadata.yml
 1. Write payload
-1. Run default rake task
+1. Run rake task to build all knowledge objects
     ```
-    rake
+    rake kobble
     ```
 
 ## Loading Knowledge Objects
+The options for putting a knowledge object into an activator are:
+* PUT request to running Activator
+* Add to shelf directory of Activator before starting it.
+* Add to Knowledge Grid Library
 
-* PUT request to Activator
-* Add to shelf directory of Activator
-* Knowledge Grid Library ("Kaleb")
-
-### PUT Knowledge Object
+### PUT Knowledge Object in Running Activator
 
 Example using a locally running activator and the kobbled hello-js knowledge object in the build/ directory.
 ```
@@ -32,6 +50,10 @@ curl -X PUT \
   -H 'accept-encoding: text/plain' \
   -H 'content-type: application/json' \
   --data @build/hello-js.json 
+```
+**OR**
+```
+rake activate['hello-js']
 ```
 
 The response should be:
@@ -48,6 +70,10 @@ curl --request POST \
   --header 'content-type: application/json' \
   --header 'accept: application/json' \
   --data '{"name": "Alice"}'
+```
+**OR**
+```
+rake test['hello-js']
 ```
 
 The result should be
