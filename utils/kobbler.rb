@@ -32,11 +32,14 @@ class Kobbler
     # construct output message based on metadata
     output_message = build_template(metadata, OUTPUT_MESSAGE_TEMPLATE)
 
+    # construct shelf uri for knowledge object
+    shelf_uri = "ark:/kobble/#{File.basename(input_dir)}"
+
     # create knowledge object hash
     kobject = { inputMessage: input_message,
                 outputMessage: output_message,
                 payload: payload,
-                url: "demourl"}
+                uri: shelf_uri }
 
     # write knowledge object
     outfile_name = "#{File.basename(input_dir)}.json"
