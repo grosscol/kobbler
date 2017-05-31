@@ -34,7 +34,31 @@ curl -X PUT \
   --data @build/hello-js.json 
 ```
 
+The response should be:
+```
+Object ark:/kobble/hello-js added to the shelf
+```
+
 ## Test Loaded Knowledge Object
 
-1. POST input data to activator with the kobject loaded
-1. Results
+POST input data to activator with the kobject loaded
+```
+curl --request POST \
+  --url http://localhost:8080/knowledgeObject/ark:/kobble/hello-js/result \
+  --header 'content-type: application/json' \
+  --header 'accept: application/json' \
+  --data '{"name": "Alice"}'
+```
+
+The result should be
+```
+{
+  "result": "Hello, Alice",
+  "source": "http://n2t.net//ark:/kobble/hello-js",
+  "metadata": {
+    "arkId": {
+      "arkId": "ark:/kobble/hello-js"
+    }
+  }
+}
+```
