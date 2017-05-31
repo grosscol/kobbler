@@ -2,14 +2,14 @@
 utils = File.expand_path('../utils', __FILE__)
 $LOAD_PATH.unshift(utils) unless $LOAD_PATH.include?(utils)
 
-require 'kobbler'
 require 'find'
-require 'pry'
 
-# by default kobble all the things
+require 'kobbler'
+require 'krest'
+
 task :default => :kobble
 
-# Find the payloads in the src directory and make knowledge objects
+desc "Make knowledge objects for all payloads under src/"
 task :kobble do
   puts "Kobbling all payloads into ./build"
 
@@ -31,3 +31,43 @@ end
 
 # Alias for kobble
 task :cobble => :kobble
+
+desc "Stuff assembled knowledge object into activator."
+task :activate, [:kobject_name] do |task, args|
+  unless args[:kobject_name]  
+    puts "kobject_name required. e.g. activate['hello-js']"
+    next
+  end
+
+  kobject_path = File.join("build", "#{args[:kobject_name]}.json")
+  unless File.exist?(kobject_path)
+    puts "#{kobject_path} not found." 
+    next
+  end
+
+  puts "Putting #{args[:kobject_name]} into activator."
+  Krest.put(kobject_path)
+end
+
+desc "Test knowledge object in activator."
+task :test, [:kobject_name] do |task, args|
+  unless args[:kobject_name]  
+    puts "kobject_name required. e.g. test['hello-js']"
+    next
+  end
+
+  kobject_path = File.join("build", "#{args[:kobject_name]}.json")
+  unless File.exist?(kobject_path)
+    puts "#{kobject_path} not found." 
+    next
+  end
+
+  test_data_path = File.join("src", args[:kobject_name], "test", "input.json")
+  unless File.exist? test_data_path
+    puts "#{test_data_path} not found."
+    next
+  end
+
+  puts "Testing #{args[:kobject_name]}."
+  Krest.test(kobject_path, test_data_path)
+end
