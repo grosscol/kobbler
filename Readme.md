@@ -25,7 +25,7 @@ bundle install
 
 ### PUT Knowledge Object
 
-Example using a locally running activator and the hello-js knowledge object:
+Example using a locally running activator and the kobbled hello-js knowledge object in the build/ directory.
 ```
 curl -X PUT \
   http://localhost:8080/shelf/ark:/kobble/hello-js \
