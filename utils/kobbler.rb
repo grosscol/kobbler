@@ -91,6 +91,8 @@ class Kobbler
       'Python'
     when '.sh'
       'Bash'
+    when '.js'
+      'JS'
     else
       'Unknown'
     end
