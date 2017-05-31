@@ -1,3 +1,3 @@
-function perform(name){
-  return "Hello, " + name;
+function perform(args){
+  return 'Hello, ' + args['name'];
 }
