@@ -1,6 +1,6 @@
 # Add the utils directory to ruby load path
-utils = File.expand_path('../utils', __FILE__)
-$LOAD_PATH.unshift(utils) unless $LOAD_PATH.include?(utils)
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'find'
 
