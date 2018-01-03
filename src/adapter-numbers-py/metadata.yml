@@ -1,0 +1,6 @@
+---
+function_name: numbers
+parameters:
+  - name: params
+    type: MAP
+return_type: MAP
