@@ -11,20 +11,47 @@ Knowledge Grid Knowledge Objects for development with the Landis-Lewis Lab.
     bundle install
     ```
 
-## Example Use
-1. Make sure an activator is running locally
-2. Build all the knowledge objects
+## Setup
+1. Build docker image
     ```
-    rake kobble
+    docker build -f activator.dockerfile -t kgrid-activator-1.0.1
     ```
-3. Load the hello-js knowledge object into the activator
+1. Create/Run docker container
     ```
-    rake activate['hello-js']
+    docker create --name kga -p 8080:8080 kgrid-activator-1.0.1
     ```
-4. Test the hello-js knowledge object.
+1. Start and test docker container
     ```
-    rake test['hello-js']
+    docker start kga
+    curl localhost:8080/hello/world
     ```
+
+## Use
+### Build KGrid Knowledge Objects from Sources
+Build all the knowledge objects
+```
+rake kobble
+```
+
+### Loading Knowledge Objects into Activator
+Load the count-spek knowledge object into the activator
+```
+rake activate['count-spek']
+```
+or
+```
+curl -X PUT localhost:8080/count/spek --form ko=@build/count-spek.zip
+```
+
+### Test the Knowledge Object
+Test the hello-js knowledge object is loaded.
+```
+rake test['count-spek']
+```
+or
+```
+curl localhost:8080/count/spek 
+```
 
 ## Authoring New Knowledg Objects
 1. Make directory under src/
