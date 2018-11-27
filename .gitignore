@@ -3,3 +3,4 @@ scratch/*
 
 # Ignore built artifacts
 build/*
+intermediates/

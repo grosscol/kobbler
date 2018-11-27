@@ -1,16 +1,11 @@
 require 'find'
 require 'json'
 require 'yaml'
-require 'rdf'
-require 'erubis'
 
+# @author Colin Gross
+# Utility class providing functionality for building kgrid objects
 class Kobbler
-  INPUT_MESSAGE_ERB_FILE  = File.expand_path('../templates/input_message.xml.erb', __FILE__)
-  OUTPUT_MESSAGE_ERB_FILE = File.expand_path('../templates/output_message.xml.erb', __FILE__)
   
-  INPUT_MESSAGE_TEMPLATE  = File.read(INPUT_MESSAGE_ERB_FILE)
-  OUTPUT_MESSAGE_TEMPLATE = File.read(OUTPUT_MESSAGE_ERB_FILE)
-
   def self.kobble(input_dir, output_dir=nil)
     if input_dir.nil?
       puts "Input directory required."
@@ -23,68 +18,31 @@ class Kobbler
     # get metadata from file in directory
     metadata = load_metadata(input_dir)
 
-    # get payload hash
-    payload = load_payload(input_dir)
+    # build knowledge object metadata
+    #
+    # build model metadata
+    #
+    # build open api service description
+    #
+    # build zip file
 
-    # construct input message based on metadata
-    input_message = build_template(metadata, INPUT_MESSAGE_TEMPLATE)
 
-    # construct output message based on metadata
-    output_message = build_template(metadata, OUTPUT_MESSAGE_TEMPLATE)
-
-    # construct shelf uri for knowledge object
-    shelf_uri = "ark:/kobble/#{File.basename(input_dir)}"
-
-    # create knowledge object hash
-    kobject = { inputMessage: input_message,
-                outputMessage: output_message,
-                payload: payload,
-                uri: shelf_uri }
-
-    # write knowledge object
-    outfile_name = "#{File.basename(input_dir)}.json"
-    File.write( File.join(output_dir, outfile_name), kobject.to_json ) 
   end
 
-  def self.build_template(metadata, template)
-    template = Erubis::Eruby.new(template)
-    template.result(metadata)
-  end
-
+  # Loads metadata into a hash
+  #
+  # @param input_dir [String] path to directory containing a metadata.yml
+  # @return [Hash] data loaded from file or empty.
   def self.load_metadata(input_dir)
-    metadata_path = find_metadata_file(input_dir)
-    if metadata_path
+    metadata_path = File.join(input_dir, 'metadata.yml')
+    if File.exists? metadata_path
       YAML.load_file(metadata_path)
     else
       {}
     end
   end
 
-  def self.load_payload(input_dir)
-    payload_path = find_payload_file(input_dir)
-    return {} unless payload_path
-
-    # return a hash of the payload
-    { content: File.read(payload_path),
-      functionName: "perform",
-      engineType: resolve_engine(payload_path) }
-  end
-
-  def self.find_payload_file(input_dir)
-    filename = Dir.entries(input_dir).find do |entry|
-      File.basename(entry,'.*') == 'payload'
-    end
-    File.join(input_dir, filename) if filename
-  end
-
-  def self.find_metadata_file(input_dir)
-    filename = Dir.entries(input_dir).find do |entry|
-      File.basename(entry) == 'metadata.yml'
-    end
-    File.join(input_dir, filename) if filename
-  end
-
-  def self.resolve_engine(path)
+  def self.resolve_adapter_type(path)
     case File.extname(path)
     when '.rb'
       'Ruby'
@@ -95,9 +53,9 @@ class Kobbler
     when '.sh'
       'Bash'
     when '.js'
-      'JS'
+      'Javascript'
     else
-      'Unknown'
+      'RESOURCE'
     end
   end
 

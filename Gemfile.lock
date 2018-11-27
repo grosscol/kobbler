@@ -2,22 +2,16 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
-    concurrent-ruby (1.0.5)
     erubis (2.7.0)
     ethon (0.11.0)
       ffi (>= 1.3.0)
     ffi (1.9.18)
-    hamster (3.0.0)
-      concurrent-ruby (~> 1.0)
     json (2.1.0)
-    link_header (0.0.8)
     method_source (0.9.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
-    rdf (3.0.1)
-      hamster (~> 3.0)
-      link_header (~> 0.0, >= 0.0.8)
+    rubyzip (1.2.2)
     typhoeus (1.3.0)
       ethon (>= 0.9.0)
 
@@ -28,8 +22,8 @@ DEPENDENCIES
   erubis
   json
   pry
-  rdf
+  rubyzip
   typhoeus
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

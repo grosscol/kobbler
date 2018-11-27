@@ -1,0 +1,19 @@
+{
+  "title" : "Icon Array",
+  "description" : "JavaScript object to generate visual representation of risk scores. To use, create a div with an id=<any id name>, then create a dictionary with the proper values to pass into the draw_array function. Run the function, and the object will draw the visual where you put your div in the html code. NOTE: this knowledge object uses D3.JS, so to use it you have to include a script source to D3",
+  "arkId" : "ark:/icon/array",
+  "citations" : [ "http://cbssm.med.umich.edu/how-we-can-help/tools-and-resources/pictographs-icon-arrays" ],
+  "keywords" : "Icon array, visualization",
+  "owners" : "KGRID",
+  "contributors" : "KGRID TEAM",
+  "license" : {
+    "licenseName" : "",
+    "licenseLink" : ""
+  },
+  "url" : "http://url",
+  "published" : false,
+  "version" : "v0.0.1",
+  "lastModified" : 1529947373860,
+  "createdOn" : 1529947373860,
+  "service" : "model/service/servicedescriptor.yaml"
+}

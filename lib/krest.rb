@@ -2,6 +2,8 @@ require 'typhoeus'
 require 'json'
 require 'pry'
 
+# @author Colin Gross
+# Utility class to handle restful interactions with kgrid.
 class Krest
 
   def self.put(kobject_path, activator_url=nil)

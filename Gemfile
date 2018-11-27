@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 gem 'json'
-gem 'rdf'
+gem 'rubyzip'
 gem 'pry'
 gem 'erubis'
 gem 'typhoeus'
